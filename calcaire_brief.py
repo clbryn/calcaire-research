@@ -126,7 +126,7 @@ THIN    = "─" * 64
 
 def build_brief(data: dict, today: str) -> str:
     ticker = data["ticker"]
-    rec    = str(data["recommendation"]).replace("-", " ").upper()
+    rec    = str(data["recommendation"]).replace("-", " ").replace("_", " ").upper()
 
     # Debt-to-equity: yfinance returns it as a plain ratio (not %)
     de_raw = data.get("debt_to_equity")
