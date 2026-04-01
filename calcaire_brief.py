@@ -4,31 +4,14 @@ Calcaire Research — Equity Brief Generator
 Usage: python calcaire_brief.py <TICKER>
 """
 
-import subprocess
 import sys
-
-
-def install(package):
-    # Try standard install first; fall back to --break-system-packages for
-    # environments (e.g. Debian/Ubuntu) where the system pip enforces isolation.
-    for extra in ([], ["--break-system-packages"]):
-        try:
-            subprocess.check_call(
-                [sys.executable, "-m", "pip", "install", package, "-q", *extra],
-                stderr=subprocess.DEVNULL,
-            )
-            return
-        except subprocess.CalledProcessError:
-            if extra:
-                raise  # already tried the fallback
-
 
 try:
     import yfinance as yf
 except ImportError:
-    print("Installing yfinance...")
-    install("yfinance")
-    import yfinance as yf
+    print("Error: yfinance is not installed.")
+    print("Run:  pip install yfinance")
+    sys.exit(1)
 
 
 import argparse
